@@ -1,0 +1,129 @@
+:root {
+  color-scheme: light dark;
+  --bg: #f4f5f7;
+  --panel: #ffffff;
+  --text: #14161a;
+  --muted: #5c6570;
+  --line: #d8dde3;
+  --accent: #0f766e;
+  --on-accent: #ffffff;
+  --accent-soft: color-mix(in oklab, var(--accent) 14%, var(--panel));
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #070a10;
+    --panel: #121820;
+    --text: #e8ecf1;
+    --muted: #9aa3ad;
+    --line: #2a313a;
+    --accent: #2dd4bf;
+    --on-accent: #ffffff;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100dvh;
+  font-family: "Avenir Next", "Segoe UI", "PingFang TC", "Noto Sans TC", sans-serif;
+  background:
+    radial-gradient(900px 480px at 70% -10%, color-mix(in oklab, var(--accent) 16%, transparent), transparent 55%),
+    radial-gradient(600px 360px at 0% 100%, color-mix(in oklab, #38bdf8 10%, transparent), transparent 55%),
+    var(--bg);
+  color: var(--text);
+}
+main {
+  width: min(100%, 40rem);
+  margin: 0 auto;
+  padding: 1rem 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.hero h1 {
+  margin: 0;
+  font-family: "Iowan Old Style", Palatino, "Songti TC", serif;
+  font-size: clamp(1.7rem, 4vw, 2.1rem);
+  letter-spacing: 0.06em;
+  text-align: center;
+}
+.tagline { margin: 0.25rem 0 0; text-align: center; color: var(--muted); font-size: 0.9rem; }
+.note {
+  margin: 0; padding: 0.55rem 0.7rem; border-radius: 0.55rem;
+  border: 1px solid var(--line); background: color-mix(in oklab, var(--accent) 8%, var(--panel));
+  color: var(--muted); font-size: 0.8rem; line-height: 1.4;
+}
+.status { margin: 0; font-size: 0.78rem; color: var(--muted); }
+.card {
+  border: 1px solid var(--line);
+  background: color-mix(in oklab, var(--panel) 92%, transparent);
+  border-radius: 0.65rem;
+  padding: 0.75rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.card h2 {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 750;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+textarea, select, input[type="range"] {
+  font: inherit;
+  width: 100%;
+}
+textarea, select {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--text);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.6rem;
+  resize: vertical;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 650;
+  color: var(--muted);
+}
+.field em {
+  font-style: normal;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.field.grow { flex: 1; min-width: 8rem; }
+.row { display: flex; flex-wrap: wrap; gap: 0.55rem; }
+.controls { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+button {
+  font: inherit; border: 1px solid transparent; background: var(--accent); color: var(--on-accent);
+  border-radius: 0.5rem; padding: 0.45rem 0.75rem; font-weight: 650; cursor: pointer;
+}
+button.secondary { background: var(--accent-soft); color: var(--text); border-color: var(--line); }
+button.hot {
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--accent) 55%, transparent);
+}
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+button:hover:not(:disabled) { filter: brightness(1.05); }
+.interim {
+  margin: 0;
+  min-height: 1.2em;
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+.meter {
+  height: 0.45rem;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--line) 70%, var(--panel));
+  overflow: hidden;
+}
+.meter-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--accent), #38bdf8);
+  transition: width 60ms linear;
+}
+.hint { margin: 0; font-size: 0.78rem; color: var(--muted); }
+.hint a { color: var(--accent); }

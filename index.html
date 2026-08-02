@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="description"
+      content="聲語匣：瀏覽器語音合成與識別小品。純前端 Playgrounds SAM。"
+    />
+    <title>聲語匣</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main>
+      <header class="hero">
+        <h1>聲語匣</h1>
+        <p class="tagline">語音合成 · 語音識別 · 回聲</p>
+      </header>
+      <p class="note">
+        使用瀏覽器 Web Speech API（文字轉語音／語音轉文字）。需麥克風權限；支援度以 Chromium
+        系最佳。教學玩具——不是正式 ASR／TTS 服務，資料路徑依瀏覽器與作業系統實作而定。
+      </p>
+      <p class="status" id="support">…</p>
+
+      <label class="field">
+        <span>語系</span>
+        <select id="lang">
+          <option value="zh-TW" selected>zh-TW</option>
+          <option value="zh-CN">zh-CN</option>
+          <option value="en-US">en-US</option>
+          <option value="ja-JP">ja-JP</option>
+        </select>
+      </label>
+
+      <section class="card">
+        <h2>合成（TTS）</h2>
+        <textarea id="text" rows="3" placeholder="輸入要念的句子…">你好，我是山姆鍋的遊樂場小品。</textarea>
+        <div class="row">
+          <label class="field grow">
+            <span>聲音</span>
+            <select id="voice"></select>
+          </label>
+        </div>
+        <div class="row">
+          <label class="field grow">
+            <span>語速 <em id="rate-val">1.0</em></span>
+            <input id="rate" type="range" min="0.5" max="1.8" step="0.1" value="1" />
+          </label>
+          <label class="field grow">
+            <span>音高 <em id="pitch-val">1.0</em></span>
+            <input id="pitch" type="range" min="0.5" max="1.8" step="0.1" value="1" />
+          </label>
+        </div>
+        <div class="controls">
+          <button type="button" id="btn-speak" class="primary">播放</button>
+          <button type="button" id="btn-stop" class="secondary">停止</button>
+        </div>
+        <p class="status" id="synth-status">就緒</p>
+      </section>
+
+      <section class="card">
+        <h2>識別（STT）</h2>
+        <div id="meter" class="meter" hidden>
+          <div id="level-fill" class="meter-fill"></div>
+        </div>
+        <textarea id="transcript" rows="4" placeholder="辨識結果會出現在這裡…"></textarea>
+        <p class="interim" id="interim" aria-live="polite"></p>
+        <div class="controls">
+          <button type="button" id="btn-listen" class="primary">開始聆聽</button>
+          <button type="button" id="btn-rec-stop" class="secondary">停止</button>
+          <button type="button" id="btn-to-synth" class="secondary">送到合成</button>
+          <button type="button" id="btn-clear" class="secondary">清空</button>
+          <button type="button" id="btn-echo" class="secondary">回聲一句</button>
+        </div>
+        <p class="status" id="rec-status">就緒</p>
+      </section>
+
+      <p class="hint">
+        Playgrounds <a href="https://samkuo.me/playgrounds/">遊樂場</a> 範本小品。
+      </p>
+    </main>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
